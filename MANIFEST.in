@@ -1,0 +1,2 @@
+include src/hgfind/biomart-gene-coordinates.txt
+include VERSION
