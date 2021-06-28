@@ -1,5 +1,5 @@
 # Tests whether the code passes black style
-name: Black check
+name: black
 
 on:
   push:
