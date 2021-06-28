@@ -299,7 +299,11 @@ def is_int(in_obj):
         return False
 
 
-if __name__ == "__main__":
+def main():
+    """
+    Parses command line gene argument and prints result on stdout
+
+    """
     parser = argparse.ArgumentParser(
         description="Get the human genome (hg38) coordinates of a gene",
     )
@@ -318,3 +322,7 @@ if __name__ == "__main__":
     start = result["start_coord"]
     end = result["end_coord"]
     print(f"{test_gene_name} => {chr_n}:{start}-{end}")
+
+
+if __name__ == "__main__":
+    main()
