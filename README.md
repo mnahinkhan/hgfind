@@ -7,6 +7,9 @@ Get the human genome (hg38) coordinates of a gene
 pip install hgfind
 ```
 
+*Requirements*:
+ - Python >=3.6
+
 ## Usage
 
 `hgfind` can be used either on the commandline or as a module within
