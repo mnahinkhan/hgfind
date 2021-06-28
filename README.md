@@ -1,5 +1,6 @@
 # hgfind
 [![Python package](https://github.com/mnahinkhan/hgfind/actions/workflows/python-package.yml/badge.svg)](https://github.com/mnahinkhan/hgfind/actions/workflows/python-package.yml)
+[![Black check](https://github.com/mnahinkhan/hgfind/actions/workflows/black-check.yml/badge.svg)](https://github.com/mnahinkhan/hgfind/actions/workflows/black-check.yml)
 
 Get the human genome (hg38) coordinates of a gene
 
