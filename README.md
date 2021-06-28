@@ -12,7 +12,7 @@ pip install hgfind
 
 ## Usage
 
-`hgfind` can be used either on the commandline or as a module within
+`hgfind` can be used either on the command line or as a function within
 Python
 
 ### As a commandline tool
@@ -40,9 +40,7 @@ $ echo $?
 1
 ```
 
-
-
-### As a Python module
+### As a function in Python
 As an example on the Python REPL:
 ```
 >>> from hgfind import hgfind
