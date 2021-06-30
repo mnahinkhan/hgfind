@@ -119,11 +119,20 @@ def hgfind(gene: str) -> Dict:
         name_to_official, official_to_coord = file_to_dicts(PATH_TO_BIO_MART)
         # Create parent dir if needed
         Path(PATH_TO_PICKLE).parent.mkdir(parents=True, exist_ok=True)
-        with open(PATH_TO_PICKLE, "wb") as handle:
-            pickle.dump(
-                [name_to_official, official_to_coord],
-                handle,
-                protocol=pickle.HIGHEST_PROTOCOL,
+        try:
+            print(
+                "Generating pickle (cache) file for faster lookup next time...",
+                file=sys.stderr,
+            )
+            with open(PATH_TO_PICKLE, "wb") as handle:
+                pickle.dump(
+                    [name_to_official, official_to_coord],
+                    handle,
+                    protocol=pickle.HIGHEST_PROTOCOL,
+                )
+        except PermissionError:
+            print(
+                "Could not cache due to permission errors...", file=sys.stderr
             )
 
     gene = gene.upper()
@@ -273,10 +282,6 @@ def file_to_dicts(path):
 
             line = bio_mart_file.readline()
 
-    print(
-        "Generating pickle (cache) file for faster lookup next time...",
-        file=sys.stderr,
-    )
     for official_name, coords in official_to_coord.items():
         chr_no, start_coord_array, end_coord_array = coords
 
