@@ -107,11 +107,12 @@ def hgfind(gene: str) -> Dict:
         with open(PATH_TO_PICKLE, "rb") as handle:
             try:
                 name_to_official, official_to_coord = pickle.load(handle)
-            except ModuleNotFoundError:
-                is_not_pickled = True
-            except AttributeError:
-                is_not_pickled = True
-            except ValueError:
+            except (
+                ModuleNotFoundError,
+                AttributeError,
+                ValueError,
+                PermissionError,
+            ):
                 is_not_pickled = True
 
     if is_not_pickled:
