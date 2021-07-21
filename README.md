@@ -2,6 +2,7 @@
 [![pytest](https://github.com/mnahinkhan/hgfind/actions/workflows/python-package.yml/badge.svg)](https://github.com/mnahinkhan/hgfind/actions/workflows/python-package.yml)
 [![black](https://github.com/mnahinkhan/hgfind/actions/workflows/black-check.yml/badge.svg)](https://github.com/mnahinkhan/hgfind/actions/workflows/black-check.yml)
 [![isort](https://github.com/mnahinkhan/hgfind/actions/workflows/isort-check.yml/badge.svg)](https://github.com/mnahinkhan/hgfind/actions/workflows/isort-check.yml)
+[![PyPI version](https://badge.fury.io/py/hgfind.svg)](https://badge.fury.io/py/hgfind)
 
 Get the human genome (hg38) coordinates of a gene
 
