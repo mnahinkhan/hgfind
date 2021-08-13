@@ -25,6 +25,7 @@ class TestGeneToCoord(unittest.TestCase):
         self.assertEqual(result["chr_n"], 14)
         self.assertEqual(result["start_coord"], 21209136)
         self.assertEqual(result["end_coord"], 21269494)
+        self.assertEqual(result["strand"], "-")
 
     def test_synonym_success(self):
         """
@@ -36,6 +37,7 @@ class TestGeneToCoord(unittest.TestCase):
         self.assertEqual(result["chr_n"], 4)
         self.assertEqual(result["start_coord"], 82352498)
         self.assertEqual(result["end_coord"], 82374503)
+        self.assertEqual(result["strand"], "-")
 
     def test_case_sensitivity(self):
         """

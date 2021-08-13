@@ -29,11 +29,16 @@ where `gene` is a gene name such as "PTEN". The name can be a synonym as well.
 A successful example:
 ```
 $ hgfind auf1
-HNRNPD => 4:82352498-82374503
+HNRNPD => 4:82352498-82374503 (-)
 
 $ echo $?
 0
 ```
+
+The result shows that `HNRNPD` (a synonym for `AUF1`) lies on chromosome 4,
+in the specified base interval. The `(-)` indicates that its transcripts
+all lie on the reverse strand.
+
 
 Using an unrecognized name results in an error:
 ```
@@ -49,7 +54,7 @@ As an example on the Python REPL:
 ```
 >>> from hgfind import hgfind
 >>> hgfind("Neat2")
-{'chr_n': 11, 'start_coord': 65497688, 'end_coord': 65506516, 'official_name': 'MALAT1'}
+{'chr_n': 11, 'start_coord': 65497688, 'end_coord': 65506516, 'strand': '+', 'official_name': 'MALAT1'}
 ```
 
 Using an unrecognized name results in an error:

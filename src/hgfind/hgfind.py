@@ -146,6 +146,7 @@ def hgfind(gene: str) -> Dict:
             rna_info["chr_n"],
             rna_info["start_coord"],
             rna_info["end_coord"],
+            rna_info["strand"],
         ) = official_to_coord[name_to_official[gene]]
         rna_info["official_name"] = name_to_official[gene]
 
@@ -192,6 +193,7 @@ def file_to_dicts(path):
                 wiki_name,
                 uniprot_name,
                 str_chr_no,
+                strand,
             ) = [wss.strip() for wss in line.split("\t")]
 
             names = [
@@ -250,6 +252,7 @@ def file_to_dicts(path):
                         prev_chr_no,
                         prev_start_coord,
                         prev_end_coord,
+                        prev_strand,
                     ) = official_to_coord[official_name]
 
                     if prev_chr_no != chr_no:
@@ -264,7 +267,8 @@ def file_to_dicts(path):
                 prev_chr_no,
                 prev_start_coord,
                 prev_end_coord,
-            ) = official_to_coord.get(official_name, (-1, [], []))
+                prev_strand,
+            ) = official_to_coord.get(official_name, (-1, [], [], []))
 
             if int(prev_chr_no) != -1 and prev_chr_no != chr_no:
                 line = bio_mart_file.readline()
@@ -273,22 +277,38 @@ def file_to_dicts(path):
             new_chr_no = chr_no
             new_start_coord = prev_start_coord + [start_coord]
             new_end_coord = prev_end_coord + [end_coord]
+            new_strand = prev_strand + [strand]
 
             official_to_coord[official_name] = (
                 new_chr_no,
                 new_start_coord,
                 new_end_coord,
+                new_strand,
             )
 
             line = bio_mart_file.readline()
 
     for official_name, coords in official_to_coord.items():
-        chr_no, start_coord_array, end_coord_array = coords
+        chr_no, start_coord_array, end_coord_array, strand_array = coords
 
         start_coord = min(start_coord_array)
         end_coord = max(end_coord_array)
 
-        official_to_coord[official_name] = (chr_no, start_coord, end_coord)
+        if not (
+            all([c == "1" for c in strand_array])
+            or all([c == "-1" for c in strand_array])
+        ):
+            strand = "+/-"
+
+        else:
+            strand = "+" if strand_array[0] == "1" else "-"
+
+        official_to_coord[official_name] = (
+            chr_no,
+            start_coord,
+            end_coord,
+            strand,
+        )
 
     return name_to_official, official_to_coord
 
@@ -327,7 +347,8 @@ def main():
     chr_n = result["chr_n"]
     start = result["start_coord"]
     end = result["end_coord"]
-    print(f"{test_gene_name} => {chr_n}:{start}-{end}")
+    strand = result["strand"]
+    print(f"{test_gene_name} => {chr_n}:{start}-{end} ({strand})")
 
 
 if __name__ == "__main__":
